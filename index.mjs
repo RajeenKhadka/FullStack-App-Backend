@@ -9,11 +9,9 @@ import db from "./db/conn.mjs";
 
 //import routes
 import brainEntries from "./routes/brain.mjs";
-import brain from "./models/brain.mjs";
-
 import calendarEntries from "./routes/entry.mjs";
-
 import todoEntries from "./routes/todo.mjs";
+import users from "./routes/user.mjs";
 
 //Enable CORS
 
@@ -23,7 +21,7 @@ const app = express();
 
 //Middleware
 app.use(cors());
-// app.use(logger("dev"));
+app.use(logger("dev"));
 app.use(express.json());
 
 //body-parser
@@ -39,6 +37,7 @@ app.get("/", (req, res) => {
 app.use("/api/braindump", brainEntries);
 app.use("/api/calendar", calendarEntries);
 app.use("/api/todo", todoEntries);
+app.use("/api/users", users);
 //default, catch all routes
 app.get("/*", (req, res) => {
   res.redirect("/");
